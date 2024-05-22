@@ -1,0 +1,6 @@
+import random
+
+input_list = [1, 2, 35, 4]
+shuffled_list = random.sample(input_list, len(input_list))
+print("Исходный список:", input_list)
+print("Перемешанный список:", shuffled_list)
