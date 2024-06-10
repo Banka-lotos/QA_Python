@@ -7,8 +7,6 @@ from selenium.webdriver.support.ui import Select
 import re
 
 
-
-
 #иницилизирую драйвер браузера
 driver = webdriver.Chrome()
 
@@ -38,7 +36,6 @@ try:
     print('Test compleate!')
    
    
-
 
 
 
