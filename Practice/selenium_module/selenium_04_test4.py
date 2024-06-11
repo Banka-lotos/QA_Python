@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 
 
 #иницилизирую драйвер браузера
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 
 
 

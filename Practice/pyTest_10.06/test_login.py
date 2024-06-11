@@ -36,11 +36,11 @@ def test_login_failed_wrong_credentials(browser):
     password_input = browser.find_element(By.ID, "password")
     login_button = browser.find_element(By.XPATH, "//button[text()='Login']")
 
-    # Вводим неправильные логин и пароль
+    # логин и пароль
     username_input.send_keys("invaliduser")
     password_input.send_keys("invalidpassword")
 
-    # Нажимаем кнопку "Login"
+    #  "Login"
     login_button.click()
 
     # Проверяем наличие сообщения об ошибке
