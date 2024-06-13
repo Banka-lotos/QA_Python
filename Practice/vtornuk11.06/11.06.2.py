@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 @pytest.fixture(scope='function')
 def driver():
@@ -24,16 +25,22 @@ def test_order_books(driver):
     )
     offers_link.click()
     
-    # Добавить книги в корзину
-    book_images = driver.find_elements(By.CSS_SELECTOR, "img.thumbnail")
-    for book_image in book_images:
-        book_image.click()
-        add_to_basket_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "button.btn-primary.btn-block"))
-        )
-        add_to_basket_button.click()
-        driver.back()  # Возвращаемся к списку книг
+    # Задержка для надежной загрузки страницы
+    time.sleep(3)
 
+    # Индексы кнопок для добавления книг в корзину
+    indexes_to_click = [0, 1, 2, 3]
+
+    # Добавить книги в корзину
+    for i in indexes_to_click:
+        try:
+            add_to_basket_buttons = driver.find_elements(By.CSS_SELECTOR, "button.btn.btn-primary.btn-block")
+            add_to_basket_buttons[i].click()
+            print(f'Книга {i} добавлена в корзину')
+            time.sleep(2)  # Задержка для обработки добавления в корзину
+        except:
+            print(f'Не удалось добавить книгу {i}')
+    
     # Перейти в корзину
     basket_link = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.LINK_TEXT, "Посмотреть корзину"))
@@ -48,46 +55,46 @@ def test_order_books(driver):
     
     # Заполнить данные оформления заказа
     email_input = driver.find_element(By.ID, "id_username")
-    email_input.send_keys("exemple@gmail.com")
+    email_input.send_keys("sssnakeee@gmail.com")
     
     new_user_radio = driver.find_element(By.ID, "id_options_1")
     new_user_radio.click()
     
     password_input = driver.find_element(By.ID, "id_password")
-    password_input.send_keys("qwerty12345")
+    password_input.send_keys("FfFjkl123!")
     
     continue_button = driver.find_element(By.XPATH, "//button[@type='submit' and text()='Продолжить']")
     continue_button.click()
     
+    # Задержка для надежной загрузки страницы
+    time.sleep(3)
+    
     password_confirm_input = driver.find_element(By.ID, "id_password1")
-    password_confirm_input.send_keys("qwerty12345")
+    password_confirm_input.send_keys("FfFjkl123!")
     
     password_confirm_confirm_input = driver.find_element(By.ID, "id_password2")
-    password_confirm_confirm_input.send_keys("qwerty12345")
+    password_confirm_confirm_input.send_keys("FfFjkl123!")
     
     register_button = driver.find_element(By.XPATH, "//button[@name='registration_submit' and @value='Register']")
     register_button.click()
     
     first_name_input = driver.find_element(By.ID, "id_first_name")
-    first_name_input.send_keys("petr")
+    first_name_input.send_keys("AAAAAA")
     
     last_name_input = driver.find_element(By.ID, "id_last_name")
-    last_name_input.send_keys("petr")
+    last_name_input.send_keys("AAAAAABB")
     
     address_input = driver.find_element(By.ID, "id_line1")
-    address_input.send_keys("qwerty 12")
+    address_input.send_keys("Спасская дом 1 корпус 1")
     
     city_input = driver.find_element(By.ID, "id_line4")
-    city_input.send_keys("Istanbul")
+    city_input.send_keys("Питер")
     
     postcode_input = driver.find_element(By.ID, "id_postcode")
-    postcode_input.send_keys("34001")
+    postcode_input.send_keys("198266")
     
-    country_dropdown = driver.find_element(By.ID, "id_country")
-    for option in country_dropdown.find_elements(By.TAG_NAME, 'option'):
-        if option.text == 'Turkey':
-            option.click()
-            break
+    phone_number_input = driver.find_element(By.ID, "id_phone_number")
+    phone_number_input.send_keys("+79219898991")
     
     continue_button = driver.find_element(By.XPATH, "//button[@type='submit' and text()='Продолжить']")
     continue_button.click()
