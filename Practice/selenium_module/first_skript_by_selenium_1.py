@@ -1,7 +1,4 @@
-import time
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
+P
 # Инициализируем драйвер браузера (в данном случае Chrome)
 driver = webdriver.Chrome()
 
